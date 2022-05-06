@@ -1,0 +1,70 @@
+package hcmute.edu.vn.caodinhsyvy_19110143.foody2;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.database.DBManager;
+
+public class SignInActivity extends AppCompatActivity {
+
+    DBManager dbManager;
+
+    TextView txtLogin, txtCreateAccount;
+    EditText edtEmail, edtPassword;
+
+    private void mapping() {
+        dbManager = new DBManager(this);
+        txtLogin = findViewById(R.id.txtLogin);
+        edtEmail = findViewById(R.id.signInActivity_edtEmail);
+        edtPassword = findViewById(R.id.signInActivity_edtPassword);
+        txtCreateAccount = findViewById(R.id.signInActivity_txtCreateAccount);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_in);
+        mapping();
+
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkLogin()) {
+                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                    Toast.makeText(SignInActivity.this, "Login successfully!", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                    finish();
+                } else
+                    Toast.makeText(SignInActivity.this, "Email or password is invalid", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        txtCreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private Boolean checkLogin() {
+        String email = edtEmail.getText().toString();
+        String password = edtPassword.getText().toString();
+        String query = "SELECT * FROM [User] WHERE email = '" + email + "' AND " +
+                "password = '" + password + "';";
+
+        Cursor res = dbManager.GetData(query);
+        if (res.getCount() > 0)
+            return true;
+
+        return false;
+    }
+}
