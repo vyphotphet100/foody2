@@ -1,7 +1,9 @@
 CREATE TABLE [User] (
     email VARCHAR(100) UNIQUE NOT NULL PRIMARY KEY,
     password VARCHAR(100),
-    fullname VARCHAR(100)
+    fullname VARCHAR(100),
+    avatar LONGTEXT,
+    address LONGTEXT
 );
 
     CREATE TABLE [Restaurant] (

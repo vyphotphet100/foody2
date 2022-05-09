@@ -15,12 +15,14 @@ public class RestaurantCard extends BaseCard{
 
     public ImageView img;
     public TextView txtEstimatedTime, txtName;
+    LinearLayout container;
 
     @Override
     protected void mapping() {
         img = view.findViewById(R.id.restaurantCard_img);
         txtName = view.findViewById(R.id.restaurantCard_txtName);
         txtEstimatedTime = view.findViewById(R.id.restaurantCard_txtEstimatedTime);
+        container = view.findViewById(R.id.restaurantCard_container);
     }
 
     @Override
@@ -40,6 +42,6 @@ public class RestaurantCard extends BaseCard{
     }
 
     public void setOnClickListener(View.OnClickListener listener) {
-
+        container.setOnClickListener(listener);
     }
 }

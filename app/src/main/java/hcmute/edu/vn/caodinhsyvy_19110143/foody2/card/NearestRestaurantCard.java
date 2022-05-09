@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.MainActivity;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.R;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.database.DBManager;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.utils.Utils;
 
 public class NearestRestaurantCard extends BaseCard{
     private int layout = R.layout.card_nearest_restaurant;
@@ -54,7 +55,7 @@ public class NearestRestaurantCard extends BaseCard{
         mapping();
         setListenerEvent();
 
-        setupNearestRestaurant();
+        Utils.setupNearestRestaurant(gvContainer, dbManager, this.context);
     }
 
     @Override

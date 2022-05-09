@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.base.BaseData;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.database.DBManager;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.utils.Utils;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -38,7 +40,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (checkLogin()) {
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                    Toast.makeText(SignInActivity.this, "Login successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, "Login successfully!", Toast.LENGTH_LONG).show();
                     startActivity(intent);
                     finish();
                 } else
@@ -62,8 +64,10 @@ public class SignInActivity extends AppCompatActivity {
                 "password = '" + password + "';";
 
         Cursor res = dbManager.GetData(query);
-        if (res.getCount() > 0)
+        if (res.moveToNext()) {
+            BaseData.userEntity = Utils.userMapping(res);
             return true;
+        }
 
         return false;
     }

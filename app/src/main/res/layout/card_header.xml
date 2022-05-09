@@ -51,6 +51,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/headerCard_imgNoti"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="7dp"

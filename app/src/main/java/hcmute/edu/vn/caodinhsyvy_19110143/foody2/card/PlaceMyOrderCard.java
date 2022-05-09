@@ -15,11 +15,16 @@ public class PlaceMyOrderCard extends BaseCard{
     private View view;
     private Context context;
 
-    TextView txtPlaceMyOrder;
+    public TextView txtPlaceMyOrder, txtSubTotalPrice, txtTotalPrice, txtQuantity, txtQuantityInc, txtQuantityDes;
 
     @Override
     protected void mapping() {
         txtPlaceMyOrder = view.findViewById(R.id.placeMyOrderCard_txtPlaceMyOrder);
+        txtSubTotalPrice = view.findViewById(R.id.placeMyOrderCard_txtSubTotalPrice);
+        txtTotalPrice = view.findViewById(R.id.placeMyOrderCard_txtTotalPrice);
+        txtQuantity = view.findViewById(R.id.placeMyOrderCard_txtQuantity);
+        txtQuantityDes = view.findViewById(R.id.placeMyOrderCard_txtQuantityDes);
+        txtQuantityInc = view.findViewById(R.id.placeMyOrderCard_txtQuantityInc);
     }
 
     public PlaceMyOrderCard(Context context) {
@@ -36,14 +41,14 @@ public class PlaceMyOrderCard extends BaseCard{
     @Override
     protected void setListenerEvent() {
 
-        txtPlaceMyOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, OrderSuccessActivity.class);
-                context.startActivity(intent);
-                ((Activity)context).finish();
-            }
-        });
+//        txtPlaceMyOrder.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, OrderSuccessActivity.class);
+//                context.startActivity(intent);
+//                ((Activity)context).finish();
+//            }
+//        });
 
     }
 }

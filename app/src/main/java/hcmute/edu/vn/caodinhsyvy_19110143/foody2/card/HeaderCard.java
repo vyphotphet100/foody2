@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.MainActivity;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.NotificationActivity;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.R;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.SearchActivity;
 
@@ -20,13 +21,14 @@ public class HeaderCard extends BaseCard{
 
     public EditText edtTextSearch;
     public ConstraintLayout titleLayout;
-    public ImageView imgFilter;
+    public ImageView imgFilter, imgNoti;
 
     @Override
     protected void mapping() {
         edtTextSearch = view.findViewById(R.id.headerCard_edtTextSearch);
         titleLayout = view.findViewById(R.id.headerCard_titleLayout);
         imgFilter = view.findViewById(R.id.headerCard_imgFilter);
+        imgNoti = view.findViewById(R.id.headerCard_imgNoti);
     }
 
     @Override
@@ -58,6 +60,14 @@ public class HeaderCard extends BaseCard{
                     context.startActivity(intent);
                     titleLayout.requestFocus();
                 }
+            }
+        });
+
+        imgNoti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NotificationActivity.class);
+                context.startActivity(intent);
             }
         });
     }

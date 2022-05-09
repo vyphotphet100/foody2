@@ -5,30 +5,35 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.145" />
+        <entry key="app/src/main/res/drawable/ic_noti.xml" value="0.135" />
         <entry key="app/src/main/res/layout/activity_confirm_order.xml" value="0.3627450980392157" />
         <entry key="app/src/main/res/layout/activity_dish_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_home_popular_dishes.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_order_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_order_success.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_orders.xml" value="0.259375" />
-        <entry key="app/src/main/res/layout/activity_search.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_restaurant_detail.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33" />
         <entry key="app/src/main/res/layout/card.xml" value="0.25" />
         <entry key="app/src/main/res/layout/card_dish.xml" value="0.67" />
         <entry key="app/src/main/res/layout/card_dish_button.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/card_header.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/card_header.xml" value="0.33" />
         <entry key="app/src/main/res/layout/card_nearest_restaurant.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/card_notification.xml" value="0.25" />
         <entry key="app/src/main/res/layout/card_other_dishes.xml" value="0.259375" />
-        <entry key="app/src/main/res/layout/card_place_my_order.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/card_place_my_order.xml" value="0.524822695035461" />
         <entry key="app/src/main/res/layout/card_popular_dishes.xml" value="0.2832080200501253" />
         <entry key="app/src/main/res/layout/card_restaurant.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/card_search_result.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/card_search_result.xml" value="0.33" />
         <entry key="app/src/main/res/layout/card_welcome.xml" value="0.22023809523809523" />
-        <entry key="app/src/main/res/layout/dialog_edit_delivery_to.xml" value="0.259375" />
-        <entry key="app/src/main/res/layout/dialog_edit_payment_method.xml" value="0.4111111111111111" />
+        <entry key="app/src/main/res/layout/dialog_edit_account_name.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/dialog_edit_delivery_to.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/dialog_edit_payment_method.xml" value="0.49333333333333335" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_bottom_nav.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/fragment_header.xml" value="0.259375" />

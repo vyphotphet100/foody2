@@ -2,6 +2,7 @@ package hcmute.edu.vn.caodinhsyvy_19110143.foody2.card;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.R;
@@ -13,10 +14,12 @@ public class SearchResultCard extends BaseCard{
     private Context context;
 
     public ImageView imgReturn;
+    public GridLayout gvContainer;
 
     @Override
     protected void mapping() {
         imgReturn = view.findViewById(R.id.searchResultCard_imgReturn);
+        gvContainer = view.findViewById(R.id.searchResultCard_gvContainer);
     }
 
     public SearchResultCard(Context context) {

@@ -41,7 +41,7 @@
                 android:id="@+id/dishCard_txtPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="6dp"
                 android:text="$35"
                 android:textAlignment="textEnd"

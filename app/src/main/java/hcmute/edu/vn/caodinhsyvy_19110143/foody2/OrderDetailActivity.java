@@ -5,12 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.entity.DishEntity;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.entity.OrderEntity;
 
 public class OrderDetailActivity extends AppCompatActivity {
-    ImageView imgReturn;
+    public ImageView imgReturn, imgDish;
+    public TextView txtDishName, txtRating, txtQuantitySold, txtDeliverTo;
 
     private void mapping() {
         imgReturn = findViewById(R.id.orderDetailActivity_imgReturn);
+        imgDish = findViewById(R.id.orderDetailActivity_imgDish);
+        txtDishName = findViewById(R.id.orderDetailActivity_txtDishName);
+        txtRating = findViewById(R.id.orderDetailActivity_txtRating);
+        txtQuantitySold = findViewById(R.id.orderDetailActivity_txtQuantitySold);
+        txtDeliverTo = findViewById(R.id.orderDetailActivity_txtDeliverTo);
     }
 
     @Override
@@ -19,6 +29,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_detail);
         mapping();
         setEventListener();
+        setUpInitData();
     }
 
     private void setEventListener() {
@@ -28,5 +39,17 @@ public class OrderDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setUpInitData() {
+        OrderEntity orderEntity = (OrderEntity) getIntent().getSerializableExtra("orderEntity");
+        DishEntity dishEntity = (DishEntity) getIntent().getSerializableExtra("dishEntity");
+
+        int id = this.getResources().getIdentifier(dishEntity.getPicture(), "drawable", this.getPackageName());
+        imgDish.setImageResource(id);
+        txtDishName.setText(dishEntity.getName());
+        txtRating.setText(dishEntity.getRating() + " Rating");
+        txtQuantitySold.setText("$" + orderEntity.getAmount());
+        txtDeliverTo.setText(orderEntity.getDeliverTo());
     }
 }

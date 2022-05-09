@@ -9,25 +9,24 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.R;
 
-public class DishButtonCard extends BaseCard{
-    private int layout = R.layout.card_dish_button;
+public class NotificationCard extends BaseCard{
+    private int layout = R.layout.card_notification;
     private View view;
     private Context context;
 
-    public TextView txtBtn, txtDishName, txtDishPrice;
+    public TextView txtTitle, txtContent;
     public ConstraintLayout container;
     public ImageView img;
 
     @Override
     protected void mapping() {
-        txtBtn = view.findViewById(R.id.dishButtonCard_txtBtn);
-        container = view.findViewById(R.id.dishButtonCard_container);
-        txtDishPrice = view.findViewById(R.id.dishButtonCard_txtDishPrice);
-        txtDishName = view.findViewById(R.id.dishButtonCard_txtDishName);
-        img = view.findViewById(R.id.dishButtonCard_img);
+        container = view.findViewById(R.id.notificationCard_container);
+        txtTitle = view.findViewById(R.id.notificationCard_txtTitle);
+        txtContent = view.findViewById(R.id.notificationCard_txtContent);
+        img = view.findViewById(R.id.notificationCard_img);
     }
 
-    public DishButtonCard(Context context) {
+    public NotificationCard(Context context) {
         this.context = context;
         view = View.inflate(this.context, layout, null);
         onCreate();

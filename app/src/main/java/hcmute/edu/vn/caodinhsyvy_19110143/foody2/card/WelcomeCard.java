@@ -29,7 +29,7 @@ public class WelcomeCard extends BaseCard{
     private View view;
     private Context context;
 
-    public TextView txtViewMoreNearRest, txtViewPopularDishes, txtViewMoreOthers;
+    public TextView txtViewMoreNearRest, txtViewPopularDishes, txtViewMoreOthers, txtBuyNow;
     public FrameLayout containerHomeFrame;
     public LinearLayout popularDishesContainerLayout, otherDishesContainerLayout, nearestRestaurantContainerLayout;
 
@@ -40,6 +40,7 @@ public class WelcomeCard extends BaseCard{
         txtViewMoreNearRest = view.findViewById(R.id.txtViewMoreNearRest);
         txtViewPopularDishes = view.findViewById(R.id.txtViewPopularDishes);
         txtViewMoreOthers = view.findViewById(R.id.txtViewMoreOthers);
+        txtBuyNow = view.findViewById(R.id.welcomeCard_txtBuyNow);
         containerHomeFrame = ((MainActivity) context).findViewById(R.id.containerHomeFrame);
         popularDishesContainerLayout = view.findViewById(R.id.welcomeCard_popularDishesContainerLayout);
         otherDishesContainerLayout = view.findViewById(R.id.welcomeCard_otherDishesContainerLayout);
@@ -95,69 +96,22 @@ public class WelcomeCard extends BaseCard{
                 containerHomeFrame.addView(otherDishesCard.getView());
             }
         });
+
+        txtBuyNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtViewPopularDishes.callOnClick();
+            }
+        });
     }
 
     @Override
     protected void onCreate() {
         super.onCreate();
 
-        setupNearestRestaurant();
+        Utils.setupNearestRestaurant(nearestRestaurantContainerLayout, dbManager, this.context);
         Utils.setUpPopularDishes(popularDishesContainerLayout, dbManager, this.context);
         Utils.setupOtherDishes(otherDishesContainerLayout, dbManager, this.context);
     }
 
-    private void setupNearestRestaurant() {
-        nearestRestaurantContainerLayout.removeAllViews();
-
-        Cursor restaurantData = dbManager.GetData("SELECT [picture], [name], [estimated_time] FROM [Restaurant];");
-        int i=0;
-        while (restaurantData.moveToNext() && i<9) {
-            String name = restaurantData.getString(1);
-            String estimatedTime = restaurantData.getString(2);
-            String picName = restaurantData.getString(0);
-            RestaurantCard restaurantCard = new RestaurantCard(context);
-
-            int id = this.context.getResources().getIdentifier(picName, "drawable", this.context.getPackageName());
-            restaurantCard.img.setImageResource(id);
-
-            restaurantCard.txtName.setText(name);
-            restaurantCard.txtEstimatedTime.setText(estimatedTime + " mins");
-            nearestRestaurantContainerLayout.addView(restaurantCard.getView());
-
-            i++;
-        }
-
-    }
-
-    private void setupOtherDishes() {
-        otherDishesContainerLayout.removeAllViews();
-
-        Cursor dishData = dbManager.GetData("SELECT [picture], [name], [price] FROM [Dish];");
-        for (int i=0; i<15; i++)
-            dishData.moveToNext();
-
-        int i=0;
-        while (dishData.moveToNext() && i<10) {
-            String picName = dishData.getString(0);
-            String name = dishData.getString(1);
-            String price = dishData.getString(2);
-
-            DishCard dishCard = new DishCard(context);
-            int id = this.context.getResources().getIdentifier(picName, "drawable", this.context.getPackageName());
-            dishCard.img.setImageResource(id);
-            dishCard.txtName.setText(name);
-            dishCard.txtPrice.setText("$" + price);
-            dishCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, DishDetailActivity.class);
-                    context.startActivity(intent);
-                }
-            });
-            otherDishesContainerLayout.addView(dishCard.getView());
-
-            i++;
-        }
-
-    }
 }
