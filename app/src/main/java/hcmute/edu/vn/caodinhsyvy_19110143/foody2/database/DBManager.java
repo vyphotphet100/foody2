@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.MainActivity;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.R;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.utils.Utils;
 
 public class DBManager extends SQLiteOpenHelper {
     private static Boolean initSetupData = false;
@@ -23,6 +24,17 @@ public class DBManager extends SQLiteOpenHelper {
         super(context, "N4_Foody.sqlite", null, 1);
 
         this.context = context;
+
+        try {
+            String configData = Utils.readFromFile(context);
+            if (configData.contains("save_db=1"))
+                initSetupData = true;
+            else {
+                Utils.writeToFile("save_db=1", context);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try {
             if (!initSetupData) {

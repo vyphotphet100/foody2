@@ -3,9 +3,16 @@ package hcmute.edu.vn.caodinhsyvy_19110143.foody2.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -216,5 +223,36 @@ public class Utils {
             notificationEntity.setIsNew(true);
 
         return notificationEntity;
+    }
+
+    public static void writeToFile(String data, Context context) throws IOException {
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("config.txt", Context.MODE_PRIVATE));
+        outputStreamWriter.write(data);
+        outputStreamWriter.close();
+
+    }
+
+    public static String readFromFile(Context context) throws IOException {
+
+        String ret = "";
+
+        InputStream inputStream = context.openFileInput("config.txt");
+
+        if (inputStream != null) {
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String receiveString = "";
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while ((receiveString = bufferedReader.readLine()) != null) {
+                stringBuilder.append("\n").append(receiveString);
+            }
+
+            inputStream.close();
+            ret = stringBuilder.toString();
+        }
+
+
+        return ret;
     }
 }

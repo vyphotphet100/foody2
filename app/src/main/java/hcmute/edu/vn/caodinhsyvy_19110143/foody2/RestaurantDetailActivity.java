@@ -51,6 +51,15 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        txtAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RestaurantDetailActivity.this, MapRestaurantActivity.class);
+                intent.putExtra("location", txtAddress.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpInitData() {

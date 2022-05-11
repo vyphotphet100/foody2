@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.ConfirmOrderActivity;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.DishDetailActivity;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.R;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.SignInActivity;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.base.BaseData;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.card.DishButtonCard;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.database.DBManager;
@@ -37,7 +38,7 @@ public class AccountFragment extends Fragment {
     private Context context;
 
     public LinearLayout favoriteContainerLayout;
-    public ImageView imgAvatar, imgEditName;
+    public ImageView imgAvatar, imgEditName, imgLogout;
     public TextView txtName, txtEmail;
 
     public void mapping() {
@@ -48,6 +49,7 @@ public class AccountFragment extends Fragment {
         dbManager = new DBManager(getActivity());
         context = getActivity();
         imgEditName = view.findViewById(R.id.accountFragment_imgEditName);
+        imgLogout = view.findViewById(R.id.accountFragment_imgLogout);
     }
 
     @Nullable
@@ -73,6 +75,16 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 openEditAccountName();
+            }
+        });
+
+        imgLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BaseData.userEntity = null;
+                Intent intent = new Intent(getActivity(), SignInActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -120,7 +132,7 @@ public class AccountFragment extends Fragment {
                     }
                 });
 
-                favoriteContainerLayout.addView(dishButtonCard.getView());
+                favoriteContainerLayout.addView(dishButtonCard.getView(), 0);
             } while (dishCursor.moveToNext());
         }
 

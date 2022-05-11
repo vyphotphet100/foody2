@@ -187,6 +187,29 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/dishDetailActivity_imgLocation"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:src="@drawable/ic_location" />
+
+                            <TextView
+                                android:id="@+id/dishDetailActivity_txtRestaurantName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="2dp"
+                                android:text="Lau Duc Troc"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>

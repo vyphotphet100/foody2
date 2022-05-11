@@ -1,10 +1,12 @@
 package hcmute.edu.vn.caodinhsyvy_19110143.foody2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +37,8 @@ public class ConfirmOrderActivity extends AppCompatActivity {
     public TextView txtEditDeliverTo, txtEditPaymentMethod, txtDeliverTo;
     private DishEntity dishEntity;
     private DBManager dbManager;
+
+    private final Integer EDIT_DELIVER_TO_REQUEST = 1;
 
     private void mapping() {
         placeMyOrderContainerFrame = findViewById(R.id.confirmOrderActivity_placeMyOrderContainer);
@@ -74,7 +78,10 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         txtEditDeliverTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openEditDeliverToDialog();
+//                openEditDeliverToDialog();
+                Intent intent = new Intent(ConfirmOrderActivity.this, MapsActivity.class);
+                intent.putExtra("location", txtDeliverTo.getText().toString());
+                startActivityForResult(intent, EDIT_DELIVER_TO_REQUEST);
             }
         });
 
@@ -189,5 +196,27 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         txtDeliverTo.setText(BaseData.userEntity.getAddress());
         placeMyOrderCard.txtSubTotalPrice.setText(dishEntity.getPrice() + " $");
         placeMyOrderCard.txtTotalPrice.setText((dishEntity.getPrice() + 2) + " $");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDIT_DELIVER_TO_REQUEST) {
+            if(resultCode == Activity.RESULT_OK){
+                String deliverTo = data.getStringExtra("deliverTo");
+
+                txtDeliverTo.setText(deliverTo);
+
+                dbManager.QueryData("UPDATE [User] SET [address] = '" + txtDeliverTo.getText().toString() + "' " +
+                        "WHERE [email] = '" + BaseData.userEntity.getEmail() + "'");
+
+                Cursor userCursor = dbManager.GetData("SELECT * FROM [User] " +
+                        "WHERE [email] = '" + BaseData.userEntity.getEmail() + "'");
+
+                if (userCursor.moveToNext())
+                    BaseData.userEntity = Utils.userMapping(userCursor);
+            }
+        }
     }
 }

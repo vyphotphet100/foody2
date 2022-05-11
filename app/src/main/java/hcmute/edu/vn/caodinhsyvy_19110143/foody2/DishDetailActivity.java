@@ -13,18 +13,22 @@ import android.widget.Toast;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.base.BaseData;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.database.DBManager;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.entity.DishEntity;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.entity.RestaurantEntity;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.utils.Utils;
 
 public class DishDetailActivity extends AppCompatActivity {
 
-    TextView txtBuy, txtDishName, txtRating, txtQuantitySold, txtDescription;
-    ImageView imgReturn, imgDish, imgFavorite;
+    TextView txtBuy, txtDishName, txtRating, txtQuantitySold, txtDescription, txtRestaurantName;
+    ImageView imgReturn, imgDish, imgFavorite, imgLocation;
 
     private DBManager dbManager;
     private DishEntity dishEntity;
+    private RestaurantEntity restaurantEntity;
 
     private void mapping() {
         txtBuy = findViewById(R.id.dishDetailActivity_txtBuy);
         imgReturn = findViewById(R.id.dishDetailActivity_imgReturn);
+        imgLocation = findViewById(R.id.dishDetailActivity_imgLocation);
         txtDishName = findViewById(R.id.dishDetailActivity_txtDishName);
         txtRating = findViewById(R.id.dishDetailActivity_txtRating);
         txtQuantitySold = findViewById(R.id.dishDetailActivity_txtQuantitySold);
@@ -32,6 +36,7 @@ public class DishDetailActivity extends AppCompatActivity {
         imgDish = findViewById(R.id.dishDetailActivity_dishImg);
         imgFavorite = findViewById(R.id.dishDetailActivity_imgFavorite);
         dbManager = new DBManager(this);
+        txtRestaurantName = findViewById(R.id.dishDetailActivity_txtRestaurantName);
     }
 
     @Override
@@ -53,6 +58,15 @@ public class DishDetailActivity extends AppCompatActivity {
         txtRating.setText(dishEntity.getRating().toString() + " Rating");
         txtQuantitySold.setText(dishEntity.getQuantitySold().toString() + "+ Over");
         txtDescription.setText(dishEntity.getDescription() + dishEntity.getDescription() + dishEntity.getDescription() + dishEntity.getDescription());
+
+        // get restaurant
+        Cursor resCursor = dbManager.GetData("SELECT * FROM [Restaurant] " +
+                "WHERE [id] = " + dishEntity.getRestaurantId().toString());
+
+        if (resCursor.moveToNext())
+            restaurantEntity = Utils.restaurantMapping(resCursor);
+        txtRestaurantName.setText(restaurantEntity.getName());
+
     }
 
     private void setEventListener() {
@@ -69,6 +83,24 @@ public class DishDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        imgLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DishDetailActivity.this, RestaurantDetailActivity.class);
+                intent.putExtra("restaurantEntity", restaurantEntity);
+                startActivity(intent);
+            }
+        });
+
+        txtRestaurantName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DishDetailActivity.this, RestaurantDetailActivity.class);
+                intent.putExtra("restaurantEntity", restaurantEntity);
+                startActivity(intent);
             }
         });
 

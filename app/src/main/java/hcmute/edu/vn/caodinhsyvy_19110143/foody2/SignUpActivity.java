@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password = edtPassword.getText().toString();
 
         try {
-            String query = "INSERT INTO [User] VALUES('"+email+"', '"+password+"', '"+name+"')";
+            String query = "INSERT INTO [User] VALUES('"+email+"', '"+password+"', '"+name+"', 'pic_avatar4', '')";
             dbManager.QueryData(query);
             return true;
         } catch (Exception ex) {

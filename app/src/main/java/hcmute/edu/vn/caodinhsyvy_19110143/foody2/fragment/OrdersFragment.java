@@ -62,7 +62,7 @@ public class OrdersFragment extends Fragment {
         if (orderEntities.size() == 0) {
             TextView txtNoti = new TextView(getActivity());
             txtNoti.setText("You didn't place any order!");
-            txtNoti.setPadding(20, 20, 20, 20);
+            txtNoti.setPadding(60, 20, 20, 20);
             container.addView(txtNoti);
         }
 
@@ -90,7 +90,7 @@ public class OrdersFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-            container.addView(dishButtonCard.getView());
+            container.addView(dishButtonCard.getView(), 0);
         }
     }
 }

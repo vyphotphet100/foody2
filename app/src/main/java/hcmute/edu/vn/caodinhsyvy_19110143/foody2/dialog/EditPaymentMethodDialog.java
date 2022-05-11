@@ -22,7 +22,7 @@ public class EditPaymentMethodDialog {
 
     protected void mapping() {
         crdCOD = view.findViewById(R.id.editPaymentMethodDialog_crdCOD);
-        crdPaypal = view.findViewById(R.id.editPaymentMethodDialog_crdPaypal);
+//        crdPaypal = view.findViewById(R.id.editPaymentMethodDialog_crdPaypal);
     }
 
     public EditPaymentMethodDialog(Context context, AlertDialog dialog) {

@@ -63,7 +63,7 @@ public class NotificationActivity extends AppCompatActivity {
                 notificationCard.txtTitle.setText(notificationEntity.getTitle());
                 notificationCard.txtContent.setText(notificationEntity.getContent());
 
-                container.addView(notificationCard.getView());
+                container.addView(notificationCard.getView(), 0);
             } while (notiCursor.moveToNext());
         }
     }
