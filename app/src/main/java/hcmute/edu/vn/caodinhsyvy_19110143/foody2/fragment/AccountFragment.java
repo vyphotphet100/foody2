@@ -103,7 +103,7 @@ public class AccountFragment extends Fragment {
         txtEmail.setText(BaseData.userEntity.getEmail());
     }
 
-    private void setupFavorite() {
+    public void setupFavorite() {
         favoriteContainerLayout.removeAllViews();
         Cursor dishCursor = dbManager.GetData("SELECT * " +
                 "FROM [Dish] JOIN " +

@@ -14,12 +14,13 @@ import hcmute.edu.vn.caodinhsyvy_19110143.foody2.base.BaseData;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.database.DBManager;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.entity.DishEntity;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.entity.RestaurantEntity;
+import hcmute.edu.vn.caodinhsyvy_19110143.foody2.fragment.AccountFragment;
 import hcmute.edu.vn.caodinhsyvy_19110143.foody2.utils.Utils;
 
 public class DishDetailActivity extends AppCompatActivity {
 
     TextView txtBuy, txtDishName, txtRating, txtQuantitySold, txtDescription, txtRestaurantName;
-    ImageView imgReturn, imgDish, imgFavorite, imgLocation;
+    ImageView imgReturn, imgDish, imgFavorite, imgRemoveFavorite, imgLocation;
 
     private DBManager dbManager;
     private DishEntity dishEntity;
@@ -35,6 +36,7 @@ public class DishDetailActivity extends AppCompatActivity {
         txtDescription = findViewById(R.id.dishDetailActivity_txtDescription);
         imgDish = findViewById(R.id.dishDetailActivity_dishImg);
         imgFavorite = findViewById(R.id.dishDetailActivity_imgFavorite);
+        imgRemoveFavorite = findViewById(R.id.dishDetailActivity_imgRemoveFavorite);
         dbManager = new DBManager(this);
         txtRestaurantName = findViewById(R.id.dishDetailActivity_txtRestaurantName);
     }
@@ -119,6 +121,26 @@ public class DishDetailActivity extends AppCompatActivity {
                 String query = "INSERT INTO [Favorite] VALUES ('" + BaseData.userEntity.getEmail() + "', " + dishEntity.getId() + ")";
                 dbManager.QueryData(query);
                 Toast.makeText(DishDetailActivity.this, "Add to favorite list successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        imgRemoveFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // check if dish exists already in favorite dish list of user
+                Cursor checkExistingDishCursor = dbManager.GetData("SELECT * FROM [Favorite] " +
+                        "WHERE [email] = '" + BaseData.userEntity.getEmail() + "' AND [dish_id] = " + dishEntity.getId());
+
+                if (!checkExistingDishCursor.moveToNext()) {
+                    Toast.makeText(DishDetailActivity.this, "This dish does not exist in your favorite list", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String query = "DELETE FROM [Favorite] WHERE [email] = '" + BaseData.userEntity.getEmail() + "' AND [dish_id] = " + dishEntity.getId();
+                dbManager.QueryData(query);
+
+                AccountFragment accountFragment = (AccountFragment) getSupportFragmentManager().findFragmentById(R.id.accountFragment);
+                Toast.makeText(DishDetailActivity.this, "Remove dish from favorite list successfully!", Toast.LENGTH_SHORT).show();
             }
         });
     }
